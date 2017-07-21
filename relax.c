@@ -9,21 +9,21 @@ void main(int argc, char *argv[])
 	int i,j,k=0,n;
 	double sigma,Xi,error,big;
 	float tol,w;
-//	printf("Introduce el tamaño de la matriz A, x y b: ");
-//	scanf("%d",&n) ;
+
 	n=atoi(argv[1]);
 	printf(" Este es n %d\n", n);
-//	printf("Introduce la tolerancia: ");
-//	scanf("%lf",&tol) ;
+
 	sscanf(argv[2], "%f", &tol);
 	printf(" Este es tol %f\n", tol);
-//	printf("Introduce el factor de relajacion: ");
-//	scanf("%lf",&w) ;
+
 	sscanf(argv[3], "%f", &w);
-        printf(" Este es w %f\n", w);
+    printf(" Este es w %f\n", w);
+
 	clock_t t_ini, t_fin;
 	double secs;
 	t_ini = clock();
+
+	//Reserva dinámica de memoria
 
 	float **a = (float **)malloc(n * sizeof(float *));
 	for (i = 1; i <= n; i++) {
@@ -32,8 +32,7 @@ void main(int argc, char *argv[])
 
 	float *x = (float *)malloc(n * sizeof(float));
 
-	//float a[n][n+1],x[n];
-	//generacion de matriz aleatoria
+	//Generación de matriz aleatoria
 
 	int suma;
 	for(i = 1; i <= n; i++) {
@@ -46,21 +45,17 @@ void main(int argc, char *argv[])
 		x[i]=0;
 	}
 
-	/*float suma;
-	for(i=1;i<=n;i++){
-		for(j=1;j<=n;j++){
-			suma+=a[i][j];
-		}
-		a[i][i]=suma+1;
-	}*/
+	//Impresión de matriz de coeficientes
 
-	for(i=1;i<=n;i++){
+	/*for(i=1;i<=n;i++){
 		for(j=1;j<=n+1;j++){
 			printf("%f ",a[i][j]);
 		}
 		printf("\n");
-	}
-	//Solucion numerica de la relajacion
+	}*/
+
+	//Solución numérica de la relajación
+
 	do{
 		big=0;
 		for(i=1;i<=n;i++){
@@ -83,14 +78,17 @@ void main(int argc, char *argv[])
 	} while(big>=tol);
 
 	t_fin = clock();
-	printf("\nConverge en la solucion");
+
+	//Impresión de vector de soluciones
+
+	/*printf("\nConverge en la solucion");
 	for(i=1;i<=n;i++){
 		printf("\nx[%d]=%f",i,x[i]);
-	}
+	}*/
+
 	printf("\nCantidad de iteraciones:\n%d\n", k);
 	secs = (double)(t_fin - t_ini) / CLOCKS_PER_SEC;
 	printf("Tiempo de ejecucion:\n");
 	printf("%.16g milisegundos\n", secs * 1000.0);
 	printf("\n");
 }
-
